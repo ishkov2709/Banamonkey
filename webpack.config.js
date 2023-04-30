@@ -27,6 +27,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
+      audio: 'src/assets/audio/sample.mp3',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
