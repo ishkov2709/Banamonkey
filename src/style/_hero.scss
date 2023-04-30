@@ -1,0 +1,197 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #acf1f1;
+    font-family: 'Play', sans-serif;
+}
+
+section {
+    padding: 100px 0 0 0;
+}
+
+img {
+    display: block;
+    width: inherit;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.game {
+    box-sizing: content-box;
+    position: relative;
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    border: 10px solid greenyellow;
+}
+
+.target {
+    position: absolute;
+    top: 60px;
+    left: 120px;
+    width: 40px;
+    height: 40px;
+}
+
+.counter {
+    font-size: 120px;
+    color: #8c00ff;
+}
+
+.hero {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+}
+
+.score-box {
+    position: absolute;
+    top: 200px;
+    left: 180px;
+    display: flex;
+    gap: 10px;
+    font-size: 28px;
+}
+
+.enemy {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    animation-name: scale;
+    animation-duration: 2000ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes scale {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.5);
+    }    
+    100% {
+        transform: scale(1);
+    }
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, rgba(182, 182, 182, 0.7) , rgba(182, 182, 182, 0.7));
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.backdrop.active {
+    visibility: visible;
+    pointer-events: all;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 650px;
+    padding: 30px 0;
+    background: #ffffff;
+    text-align: center;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.modal.active {
+    visibility: visible;
+    pointer-events: all;
+}
+
+.hero-title {
+    margin: 0 0 50px 0;
+    color: #e1d058;
+}
+
+.hero-animation {
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+    margin-bottom: 120px;
+}
+
+.hero-img-first {
+    position: absolute;
+    animation-name: hidden;
+    animation-duration: 2000ms;
+    animation-timing-function: cubic-bezier(0.47, 0, 0.745, 0.715);
+    animation-iteration-count: infinite;
+}
+
+@keyframes hidden {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.text-play {
+    display: block;
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.btn-start {
+    margin: 0 auto;
+    background: transparent;
+    border: none;
+}
+
+.icon-start {
+    transform: scale(1);
+    transition: transform 250ms linear;
+}
+
+.icon-start:hover {
+    transform: scale(1.5);
+}
+
+.modal.over {
+    height: 300px;
+}
+
+.end-title {
+    margin: 0 0 20px 0;
+}
+
+.icon-end {
+    margin-bottom: 15px;
+}
+
+.text-retry {
+    margin: 0 0 15px 0;
+}
+
+.btn-retry {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    border: none;
+}
