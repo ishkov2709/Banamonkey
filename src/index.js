@@ -32,9 +32,6 @@ let {
 
 // Base options
 
-heroEl.style.top = `${startPositionY}px`;
-heroEl.style.left = `${startPositionX}px`;
-
 if (localStorage.getItem('score')) {
   scoreValEl.textContent = localStorage.getItem('score');
 }
@@ -47,54 +44,26 @@ if (localStorage.getItem('score')) {
 
 // Handlers
 
-const onBtnClickStartHandler = () => {
-  makeTrack(soundBoxEl, 1);
-  window.addEventListener('keydown', gameControllerHandler);
-  backdropEl.classList.remove('active');
-  modalStartEl.classList.remove('active');
-  intervalId = setInterval(() => {
-    startPositionX += 1;
-    checkPosition();
-    btnStartEl.remove('click', onBtnClickStartHandler);
-    return (heroEl.style.left = `${startPositionX}px`);
-  }, timeInterval);
+const onPressKeyStartGameHandler = evt => {
+  if (evt.code === 'Enter') {
+    return unifiedStartHandler();
+  }
 };
 
-const onBtnClickRetryHandler = () => {
-  makeTrack(soundBoxEl, 1);
+const unifiedStartHandler = () => {
   window.addEventListener('keydown', gameControllerHandler);
-  btnRetryEl.removeEventListener('click', onBtnClickRetryHandler);
+  window.removeEventListener('keydown', onPressKeyStartGameHandler);
+  btnStartEl.removeEventListener('click', unifiedStartHandler);
+  btnRetryEl.removeEventListener('click', unifiedStartHandler);
   backdropEl.classList.remove('active');
+  modalStartEl.classList.remove('active');
   modalEndEl.classList.remove('active');
   onStartPositionMaker();
   intervalId = setInterval(() => {
     startPositionX += 1;
     checkPosition();
-    btnStartEl.remove('click', onBtnClickStartHandler);
     return (heroEl.style.left = `${startPositionX}px`);
   }, timeInterval);
-};
-
-const onPressKeyStartGameHandler = evt => {
-  makeTrack(soundBoxEl, 1);
-  if (evt.code === 'Enter') {
-    window.removeEventListener('keydown', onPressKeyStartGameHandler);
-    window.addEventListener('keydown', gameControllerHandler);
-    backdropEl.classList.remove('active');
-    modalStartEl.classList.remove('active');
-    modalEndEl.classList.remove('active');
-    onStartPositionMaker();
-    intervalId = setInterval(() => {
-      startPositionX += 1;
-      checkPosition();
-      btnStartEl.remove('click', onBtnClickStartHandler);
-      return (heroEl.style.left = `${startPositionX}px`);
-    }, timeInterval);
-  }
-};
-
-const getRandomNumber = (min, max) => {
-  return Math.random() * (max - min) + min;
 };
 
 /**
@@ -155,6 +124,7 @@ const checkPosition = () => {
 */
 
 const onStartPositionMaker = () => {
+  makeTrack(soundBoxEl, 1);
   counter = 0;
 
   timeInterval = 10;
@@ -276,7 +246,7 @@ const openGameOverModal = () => {
   clearInterval(intervalId);
   backdropEl.classList.add('active');
   modalEndEl.classList.add('active');
-  btnRetryEl.addEventListener('click', onBtnClickRetryHandler);
+  btnRetryEl.addEventListener('click', unifiedStartHandler);
   window.addEventListener('keydown', onPressKeyStartGameHandler);
 };
 
@@ -296,9 +266,19 @@ const makeTrack = (box, num) => {
 
 /**
   |============================
+  | Utils
+  |============================
+*/
+
+const getRandomNumber = (min, max) => {
+  return Math.random() * (max - min) + min;
+};
+
+/**
+  |============================
   | Base Listeners
   |============================
 */
 
-btnStartEl.addEventListener('click', onBtnClickStartHandler);
+btnStartEl.addEventListener('click', unifiedStartHandler);
 window.addEventListener('keydown', onPressKeyStartGameHandler);
