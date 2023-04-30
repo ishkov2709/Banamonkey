@@ -76,7 +76,7 @@ const onBtnClickRetryHandler = () => {
 };
 
 const onPressKeyStartGameHandler = evt => {
-  console.log(evt.code);
+  makeTrack(soundBoxEl, 1);
   if (evt.code === 'Enter') {
     window.removeEventListener('keydown', onPressKeyStartGameHandler);
     window.addEventListener('keydown', gameControllerHandler);
