@@ -1,12 +1,16 @@
 {
-  "name": "learn-wp",
+  "name": "Banamonkey!",
   "version": "1.2.2",
   "description": "",
   "main": "index.js",
+  "repository": {
+   "url": "git+https://github.com/ishkov2709/Banamonkey.git"
+ },
   "scripts": {
     "start": "webpack serve",
     "dev": "webpack",
     "prod": "webpack --node-env=production",
+    "deploy": "gh-pages -d dist",
     "clear": "rd /s /q dist"
   },
   "keywords": [],
@@ -24,6 +28,7 @@
     "babel-loader": "^9.1.2",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
+    "gh-pages-webpack-plugin": "^1.0.2",
     "group-css-media-queries-loader": "^4.3.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
